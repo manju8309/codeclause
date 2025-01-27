@@ -1,0 +1,17 @@
+import hashlib
+url_database = {}
+
+def shorten_url(long_url):
+    short_hash = hashlib.sha256(long_url.encode()).hexdigest()[:6]
+    short_url = f"http://short.ly/{short_hash}"
+    url_database[short_url] = long_url
+    return short_url
+
+def expand_url(short_url):
+    return url_database.get(short_url, "URL not found")
+if _name_ == "_main_":
+    long_url = input("Enter a long URL: ")
+    short_url = shorten_url(long_url)
+    print(f"Shortened URL: {short_url}")
+    retrieved_url = expand_url(short_url)
+    print(f"Original URL: {retrieved_url}")
